@@ -11,8 +11,9 @@ target/
 .project
 .settings
 .springBeans
+data/
 .sts4-cache
-
+.env
 ### IntelliJ IDEA ###
 .idea
 *.iws
