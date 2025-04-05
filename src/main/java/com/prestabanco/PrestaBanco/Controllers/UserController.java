@@ -11,12 +11,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/v1/user")
+@RequestMapping("/user")
 @CrossOrigin("*")
 public class UserController {
 
+
     @Autowired
     UserService userService;
+
+    @GetMapping("/getNameById/{id}")
+    public ResponseEntity<UserEntity> getNameById(@PathVariable Long id){
+        return ResponseEntity.ok(userService.findById(id));
+    }
 
     @PostMapping("/register")
     public ResponseEntity<?> register (@RequestBody Map<String, Object> requestData){
