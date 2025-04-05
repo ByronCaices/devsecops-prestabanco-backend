@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/totalcost")
 @CrossOrigin("*")
 public class TotalCostCalculationController {
 
     @Autowired
     TotalCostCalculationService totalCostCalculationService;
 
-    @PostMapping("totalcostcalc")
+    @PostMapping
     public ResponseEntity<List<Double>> totalCostCalculation(
             @RequestBody MCApplicationEntity mcApplicationEntity){
         List<Double> result = totalCostCalculationService.totalCostCalculation(mcApplicationEntity);

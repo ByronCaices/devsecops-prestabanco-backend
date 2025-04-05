@@ -16,6 +16,14 @@ public class UserService {
     @Autowired
     UserRoleRepository userRoleRepository;
 
+    public UserEntity findById(Long id) {
+        UserEntity user = userRepository.findById(id);
+        if(user == null){
+            return null;
+        } else {
+            return user;
+        }
+    }
 
     public UserEntity register(String name, String password, String role){
         if(userRepository.findByName(name)==null){

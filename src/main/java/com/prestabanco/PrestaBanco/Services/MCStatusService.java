@@ -7,11 +7,18 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class MCStatusService {
 
     @Autowired
     MCStatusRepository mcStatusRepository;
+
+    public List<MCStatusEntity> getAllstatus() {
+        return new ArrayList<>(mcStatusRepository.findAll());
+    }
 
     @PostConstruct
     public void init() {
