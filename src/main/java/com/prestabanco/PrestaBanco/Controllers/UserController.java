@@ -1,5 +1,6 @@
 package com.prestabanco.PrestaBanco.Controllers;
 
+import com.prestabanco.PrestaBanco.Entities.MCTypesEntity;
 import com.prestabanco.PrestaBanco.Entities.UserEntity;
 import com.prestabanco.PrestaBanco.Services.UserService;
 
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -18,6 +20,12 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    @GetMapping("/getAll")
+    public ResponseEntity<List<UserEntity>> getAll() {
+        List<UserEntity> userEntities = userService.getAll();
+        return ResponseEntity.ok(userEntities);
+    }
 
     @GetMapping("/getNameById/{id}")
     public ResponseEntity<UserEntity> getNameById(@PathVariable Long id){

@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+import java.util.List;
 
 @RestController
 @RequestMapping("/simulate")
@@ -17,11 +18,11 @@ public class MCSimulationController {
     MCSimulationService mcSimulationService;
 
     @PostMapping
-    public ResponseEntity<Double> simulateMortgageCredit(@RequestBody Map<String, Object> requestData){
+    public ResponseEntity<List<Double>> simulateMortgageCredit(@RequestBody Map<String, Object> requestData){
         int loanAmount = (Integer) requestData.get("loanAmount");
         double annualInterestRate = ((Number) requestData.get("annualInterestRate")).doubleValue();
         int loanTerm = (Integer) requestData.get("loanTerm");
-        double result = mcSimulationService.simulateMortgageCredit(loanAmount,loanTerm,annualInterestRate);
+        List<Double> result = mcSimulationService.simulation(loanAmount,loanTerm,annualInterestRate);
         return ResponseEntity.ok(result);
     }
 

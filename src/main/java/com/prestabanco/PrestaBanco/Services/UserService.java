@@ -1,5 +1,6 @@
 package com.prestabanco.PrestaBanco.Services;
 
+import com.prestabanco.PrestaBanco.Entities.MCTypesEntity;
 import com.prestabanco.PrestaBanco.Entities.UserEntity;
 import com.prestabanco.PrestaBanco.Entities.UserRoleEntity;
 import com.prestabanco.PrestaBanco.Repositories.UserRepository;
@@ -8,6 +9,9 @@ import com.prestabanco.PrestaBanco.Repositories.UserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -15,6 +19,10 @@ public class UserService {
     UserRepository userRepository;
     @Autowired
     UserRoleRepository userRoleRepository;
+
+    public List<UserEntity> getAll() {
+        return new ArrayList<>(userRepository.findAll());
+    }
 
     public UserEntity findById(Long id) {
         UserEntity user = userRepository.findById(id);
