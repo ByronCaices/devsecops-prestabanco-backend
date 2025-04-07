@@ -8,7 +8,6 @@ pipeline {
             steps {
                 checkout scmGit(branches: [[name: '*/main'], [name: '*/develop']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/ByronCaices/devsecops-prestabanco-backend']])
                 sh "mvn clean package -DskipTests"
-                archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false, onlyIfSuccessful: true
             }
         }
         stage("Test") {
@@ -33,6 +32,11 @@ pipeline {
 				   }
                 }
             }
+        }
+    }
+    post {
+        success {
+            archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false, onlyIfSuccessful: true
         }
     }
 }
