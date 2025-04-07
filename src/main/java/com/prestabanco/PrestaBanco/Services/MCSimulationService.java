@@ -8,6 +8,9 @@ import com.prestabanco.PrestaBanco.DTOs.Simulation.DTOSimulation;
 public class MCSimulationService implements IMCSimulationService {
 
     public double simulateMortgageCredit(int loanAmount, int loanTerm, double annualInterestRate){
+        if(annualInterestRate == 0.0){
+            throw new IllegalArgumentException("No se puede simular un interes de 0%");
+        }
 
         double monthly_rate = (annualInterestRate/12.0)/100.0;
         int months = loanTerm * 12;
