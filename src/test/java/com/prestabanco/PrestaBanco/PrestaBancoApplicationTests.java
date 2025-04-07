@@ -11,7 +11,7 @@ import com.prestabanco.PrestaBanco.Services.MCSimulationService;
 class PrestaBancoApplicationTests {
 
 	@Test
-	void contextLoads() {
+	void testMortageAmount() {
         IMCSimulationService simulator = new MCSimulationService();
 
         assertEquals(

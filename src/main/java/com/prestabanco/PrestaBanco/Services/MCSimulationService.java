@@ -2,45 +2,40 @@ package com.prestabanco.PrestaBanco.Services;
 
 import org.springframework.stereotype.Service;
 
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.util.Arrays;
-import java.util.List;
+import com.prestabanco.PrestaBanco.DTOs.Simulation.DTOSimulation;
 
 @Service
 public class MCSimulationService implements IMCSimulationService {
 
     public double simulateMortgageCredit(int loanAmount, int loanTerm, double annualInterestRate){
 
-        double r = (annualInterestRate/12)/100;
-        int n = loanTerm*12;
-        double aux=Math.pow((1+r),n);
-        double M = (loanAmount*((r*aux)/(aux-1)));
+        double monthly_rate = (annualInterestRate/12.0)/100.0;
+        int months = loanTerm * 12;
+        double aux=Math.pow((1+monthly_rate), months);
+        double mortage = (loanAmount*((monthly_rate*aux)/(aux-1)));
 
-        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
-        symbols.setDecimalSeparator('.');
-        DecimalFormat df = new DecimalFormat("#.##", symbols);
-        return Double.parseDouble(df.format(M));
+        return Math.round(mortage * 100.0) / 100.0;
     }
 
-    public List<Double> simulation(int loanAmount, int loanterm, double annualInterestRate) {
+    public DTOSimulation simulation(int loanAmount, int loanTerm, double annualInterestRate) {
+        DTOSimulation simulation_result = new DTOSimulation();
 
-        double r = (annualInterestRate/12)/100;
-        int n = loanterm*12;
-        double aux=Math.pow((1+r),n);
-        double monthlyPayment = (loanAmount*((r*aux)/(aux-1))); //Valor Bruto (Sin comisiones)
-        double lienInsurance = ((0.03)*monthlyPayment)/100;  //0.03% del valor de la mensualidad
-        double fireInsurance = 20000;               // Siempre es 20.000
-        double administrationCommission = (1*loanAmount)/100;   //1% del valor del prestamo
-        double monthlyCost = monthlyPayment + lienInsurance + fireInsurance + administrationCommission;
-        double totalCost = monthlyCost*(12*loanterm);
-        return Arrays.asList(
-                monthlyPayment,
-                lienInsurance,
-                fireInsurance,
-                administrationCommission,
-                monthlyCost,
-                totalCost
-        );
+        simulation_result.mounthly_payment = simulateMortgageCredit(loanAmount, loanTerm, annualInterestRate);
+
+        simulation_result.lien_insurance = ((0.03)*simulation_result.mounthly_payment)/100;
+        
+        // It is always $20.000
+        simulation_result.fire_insurance = 20000;
+
+        // 1% of the loan ammount
+        simulation_result.administration_commission = (1*loanAmount)/100;
+        
+        simulation_result.monthly_cost = 
+            simulation_result.mounthly_payment + 
+            simulation_result.lien_insurance + simulation_result.fire_insurance + 
+            simulation_result.administration_commission;
+        simulation_result.total_cost = simulation_result.monthly_cost * 12 * loanTerm;
+
+        return simulation_result;
     }
 }

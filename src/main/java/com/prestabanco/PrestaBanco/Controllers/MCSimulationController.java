@@ -1,5 +1,6 @@
 package com.prestabanco.PrestaBanco.Controllers;
 
+import com.prestabanco.PrestaBanco.DTOs.Simulation.DTOSimulation;
 import com.prestabanco.PrestaBanco.Services.IMCSimulationService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
-import java.util.List;
 
 @RestController
 @RequestMapping("/simulate")
@@ -18,11 +18,11 @@ public class MCSimulationController {
     IMCSimulationService mcSimulationService;
 
     @PostMapping
-    public ResponseEntity<List<Double>> simulateMortgageCredit(@RequestBody Map<String, Object> requestData){
+    public ResponseEntity<DTOSimulation> simulateMortgageCredit(@RequestBody Map<String, Object> requestData){
         int loanAmount = (Integer) requestData.get("loanAmount");
         double annualInterestRate = ((Number) requestData.get("annualInterestRate")).doubleValue();
         int loanTerm = (Integer) requestData.get("loanTerm");
-        List<Double> result = mcSimulationService.simulation(loanAmount,loanTerm,annualInterestRate);
+        DTOSimulation result = mcSimulationService.simulation(loanAmount,loanTerm,annualInterestRate);
         return ResponseEntity.ok(result);
     }
 
