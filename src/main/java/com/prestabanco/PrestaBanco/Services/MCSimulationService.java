@@ -1,6 +1,5 @@
 package com.prestabanco.PrestaBanco.Services;
 
-import com.prestabanco.PrestaBanco.Entities.MCApplicationEntity;
 import org.springframework.stereotype.Service;
 
 import java.text.DecimalFormat;
@@ -9,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
-public class MCSimulationService {
+public class MCSimulationService implements IMCSimulationService {
 
     public double simulateMortgageCredit(int loanAmount, int loanTerm, double annualInterestRate){
 

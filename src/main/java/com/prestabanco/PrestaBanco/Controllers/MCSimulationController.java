@@ -1,6 +1,6 @@
 package com.prestabanco.PrestaBanco.Controllers;
 
-import com.prestabanco.PrestaBanco.Services.MCSimulationService;
+import com.prestabanco.PrestaBanco.Services.IMCSimulationService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +15,7 @@ import java.util.List;
 public class MCSimulationController {
 
     @Autowired
-    MCSimulationService mcSimulationService;
+    IMCSimulationService mcSimulationService;
 
     @PostMapping
     public ResponseEntity<List<Double>> simulateMortgageCredit(@RequestBody Map<String, Object> requestData){

@@ -4,12 +4,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+import com.prestabanco.PrestaBanco.Services.IMCSimulationService;
+import com.prestabanco.PrestaBanco.Services.MCSimulationService;
+
 
 class PrestaBancoApplicationTests {
 
 	@Test
 	void contextLoads() {
-        assertEquals(10, 4 + 10, "Paso algo mal");
+        IMCSimulationService simulator = new MCSimulationService();
+
+        assertEquals(
+            71.56, 
+            simulator.simulateMortgageCredit(10000, 12, 0.5), 
+            "Paso algo mal"
+        );
 	}
 
 }
