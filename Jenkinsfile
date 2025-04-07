@@ -1,28 +1,35 @@
 pipeline {
     agent any
-    tools{
+    tools {
         maven 'maven'
     }
-    stages{
-        stage('Build JAR'){
-            steps{
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Saki-2002/PrestaBanco']])
-                bat "mvn clean package -DskipTests"
-            }
-        }
-/*
-        stage('Unit Tests') {
+    stages {
+        stage("Build") {
             steps {
-                bat "mvn test"
+                checkout scmGit(branches: [[name: '*/main'], [name: '*/develop']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/ByronCaices/devsecops-prestabanco-backend']])
+                sh "mvn clean package -DskipTests"
+                archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false, onlyIfSuccessful: true
             }
         }
-*/
-        stage('Push image to Docker Hub'){
+        stage("Test") {
+            stages {
+                stage("Unit Testing") {
+                    steps {
+                        sh "mvn test"
+                    }
+                }
+            }
+        }
+        stage("Deploy image to Docker Hub"){
+            when {
+                branch "main"
+            }
+
             steps{
-                script{
-                   withDockerRegistry(credentialsId:'docker-credentials'){
-					bat "docker build -t saki2002/spring-image ."
-					bat "docker push saki2002/spring-image"
+                script {
+                   withDockerRegistry(credentialsId:'docker-credentials') {
+					sh "docker build -t saki2002/spring-image ."
+					sh "docker push saki2002/spring-image"
 				   }
                 }
             }
