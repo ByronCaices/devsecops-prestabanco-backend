@@ -9,7 +9,7 @@ class PrestaBancoApplicationTests {
 
 	@Test
 	void contextLoads() {
-        assertEquals(10, 4 + 6, "Paso algo mal");
+        assertEquals(10, 4 + 10, "Paso algo mal");
 	}
 
 }
