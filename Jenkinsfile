@@ -19,18 +19,12 @@ pipeline {
                 }
             }
         }
-        stage("Deploy image to Docker Hub"){
+        stage("Deploy image"){
             when {
                 branch "main"
             }
-
-            steps{
-                script {
-                   withDockerRegistry(credentialsId:'docker-credentials') {
-					sh "docker build -t saki2002/spring-image ."
-					sh "docker push saki2002/spring-image"
-				   }
-                }
+            steps {
+                sh "docker build . -t prestabanco/backend:latest"
             }
         }
     }
