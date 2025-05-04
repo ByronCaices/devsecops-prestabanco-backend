@@ -1,6 +1,5 @@
 package com.prestabanco.PrestaBanco.Controllers;
 
-import com.prestabanco.PrestaBanco.Entities.MCTypesEntity;
 import com.prestabanco.PrestaBanco.Entities.UserEntity;
 import com.prestabanco.PrestaBanco.Services.UserService;
 
