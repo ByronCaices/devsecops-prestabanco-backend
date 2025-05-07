@@ -19,6 +19,13 @@ pipeline {
                 }
             }
         }
+        stage("Static Analysis") {
+            steps {
+                withSonarQubeEnv("sonarqube-maven") {
+                    sh "mvn clean verify sonar:sonar -Dsonar.projectKey=PrestaBanco-Backend -Dsonar.projectName='PrestaBanco Backend'"
+                }
+            }
+        }
         stage("Deploy image"){
             when {
                 branch "main"
