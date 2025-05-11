@@ -22,7 +22,7 @@ pipeline {
         stage("Static Analysis") {
             steps {
                 withSonarQubeEnv("sonarqube-maven") {
-                    sh "mvn clean verify sonar:sonar -Dsonar.projectKey=PrestaBanco-Backend -Dsonar.projectName='PrestaBanco Backend'"
+                    sh "mvn clean verify sonar:sonar -Dsonar.projectKey=PrestaBanco-Backend -Dsonar.projectName='PrestaBanco Backend' -Dsonar.sources=src/main/java -Dsonar.tests=src/test/java"
                 }
             }
         }
