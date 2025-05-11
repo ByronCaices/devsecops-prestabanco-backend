@@ -1,6 +1,5 @@
 package com.prestabanco.PrestaBanco.Services;
 
-import com.prestabanco.PrestaBanco.Entities.MCTypesEntity;
 import com.prestabanco.PrestaBanco.Entities.UserEntity;
 import com.prestabanco.PrestaBanco.Entities.UserRoleEntity;
 import com.prestabanco.PrestaBanco.Repositories.UserRepository;
@@ -14,11 +13,15 @@ import java.util.List;
 
 @Service
 public class UserService {
+    UserRepository userRepository;
+    UserRoleRepository userRoleRepository;
 
     @Autowired
-    UserRepository userRepository;
-    @Autowired
-    UserRoleRepository userRoleRepository;
+    public UserService(UserRepository userRepository, UserRoleRepository userRoleRepository){
+        this.userRepository = userRepository;
+        this.userRoleRepository = userRoleRepository;
+    }
+
 
     public List<UserEntity> getAll() {
         return new ArrayList<>(userRepository.findAll());
