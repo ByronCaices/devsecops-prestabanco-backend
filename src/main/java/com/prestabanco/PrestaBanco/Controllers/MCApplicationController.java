@@ -12,8 +12,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/mc-application")
-@CrossOrigin("*")
-
 public class MCApplicationController {
 
     @Autowired

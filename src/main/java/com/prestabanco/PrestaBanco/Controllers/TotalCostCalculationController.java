@@ -11,7 +11,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/totalcost")
-@CrossOrigin("*")
 public class TotalCostCalculationController {
 
     @Autowired

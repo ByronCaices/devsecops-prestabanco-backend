@@ -11,7 +11,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user-role")
-@CrossOrigin("*")
 public class UserRoleController {
 
     @Autowired

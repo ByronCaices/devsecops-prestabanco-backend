@@ -11,7 +11,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/mc-types")
-@CrossOrigin("*")
 public class MCTypesController {
 
     @Autowired

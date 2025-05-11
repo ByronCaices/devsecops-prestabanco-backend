@@ -11,7 +11,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/simulate")
-@CrossOrigin("*")
 public class MCSimulationController {
 
     @Autowired
