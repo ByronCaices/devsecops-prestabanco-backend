@@ -25,13 +25,13 @@ public class MCSimulationService implements IMCSimulationService {
 
         simulation_result.mounthly_payment = simulateMortgageCredit(loanAmount, loanTerm, annualInterestRate);
 
-        simulation_result.lien_insurance = ((0.03)*simulation_result.mounthly_payment)/100;
+        simulation_result.lien_insurance = ((0.03)*simulation_result.mounthly_payment)/100.0;
         
         // It is always $20.000
         simulation_result.fire_insurance = 20000;
 
         // 1% of the loan ammount
-        simulation_result.administration_commission = (1*loanAmount)/100;
+        simulation_result.administration_commission = (1.0 * loanAmount)/100.0;
         
         simulation_result.monthly_cost = 
             simulation_result.mounthly_payment + 

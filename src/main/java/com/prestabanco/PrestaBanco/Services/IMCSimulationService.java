@@ -1,7 +1,5 @@
 package com.prestabanco.PrestaBanco.Services;
 
-import java.util.List;
-
 import com.prestabanco.PrestaBanco.DTOs.Simulation.DTOSimulation;
 
 
